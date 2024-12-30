@@ -202,3 +202,18 @@ INSERT INTO PRECOT (COID, PRECOID) VALUES
 ('C014', 'C013'), -- Guitar Techniques requires Painting Basics
 ('C015', 'C014'), -- Fitness Training requires Guitar Techniques
 ('C016', 'C004'); -- Ecology requires Linear Algebra
+
+
+select * from COT where COID=(
+select PRECOID from PRECOT where COID=(
+select COID from COT where COTITLE = 'Data Structures')
+);
+select (select count(*) from COT)  *(select count(*) from precot); 
+ ;
+select * from COT,PRECOT,COT as c where COT.COID=PRECOT.COID and c.COID=PRECOT.PRECOID;
+select COT.COTITLE as COT,c.COTITLE as PRECOT from COT inner join PRECOT on COT.COID=PRECOT.COID 
+inner join COT as c on c.COID=PRECOT.PRECOID;
+
+(select * from PRECOT RIGHT join COT on COT.COID=PRECOT.COID)
+except (select * from PRECOT inner join COT on COT.COID=PRECOT.COID)
+
